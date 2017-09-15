@@ -21,6 +21,7 @@ io.on('connection', function(socket){
     });
     //Permet l'affichage des messages envoyer par les utilisateurs
     socket.on('chat message', function(msg){
+        msg =  ent.encode(msg)
         io.emit('chat message', msg);
     });
     //Lorsque qu'un utilisateur ferme le chat :
@@ -29,9 +30,6 @@ io.on('connection', function(socket){
         socket.broadcast.emit('chat message', socket.pseudo + ' viens de se déconnecté !');
     });
 });
-
-
-
 
 //Défini l'écoute du serveur sur le port 
 http.listen(3000, function () {
